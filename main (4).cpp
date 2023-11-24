@@ -1,99 +1,83 @@
-/*
-1.(a)
+/* 
+1.  In our project, we will be storing user inputted data into classes divided up by each user.
+Classes will carry user's username, password and full name. Because all of this information will
+need to be accessed by the user, we will be using public contructors to recall information.
 
-Declaring a pointer is done in the same way we declare any variable with the addition of adding
-a '*', specifying that it's a pointer type, between the type and variable name.
 
-    int* pointer; //example of "pointer" being declared as an integer pointer
+int main() {
+    // Instantiating an object using static memory
+    MyClass staticObject;
+    staticObject.display();
 
-Assigning a pointer, similar to assigning any other variable, is done by by assigning 
-the pointer to some other variable, whehter it's to the variables memory address or 
-variable itself
+    // Instantiating an object using dynamic memory
+    MyClass* dynamicObject = new MyClass();
+    dynamicObject->display();
 
-    pointer=&num //pointer has been assigned to the address of num
-    
-(b) 
+    // Don't forget to free the memory allocated with 'new'
+    delete dynamicObject;
 
-Declaration of float pointer: 
-    float* pointer;
+    return 0;
+}
 
-Assignment of float pointer:
-    float weight = 5.9;
-    pointer=&weight
-    
-Initialization of float pointer
-    float weight = 5.9;
-    float* pointer=5.9;
+2. Arrays offer less functionality than vectors. Arrays can only hold a fixed amount of data, initiated from the
+outset, versus vectors that have adjustable sizes. In addition, the methods of finding data size are also different.
+In arrays, you have the function sizeof() in which the array size will be recalled in bytes, whereas in
+vectors, you have functions size() and capacity() you can recall number of elements and total storage size.
 
-Declaration of char pointer 
-    char * pointer;
-    
-Assignment of char pointer 
-    char middleInitial = 'B';
-    pointer=&middleInitial
+3. 
 
-Initialization of char pointer 
-    char middleInitial = 'B';
-    char* pointer='B';
-    
-(c) The integer pointer only stores the address of the integer
+#include <iostream>
+#include <vector>
+using namespace std;
 
-(d) Pointers are used to store information and to seemlessly iterate over elements in array.
-Since pointers store memory addresses, pointers also make the run time more efficient. The use of
-pointers also replaces the 'syntactical sugar' that isn't very necessary, again, making the run-time
-more efficient.
+class MyClass {
+private:
+    int data;
 
-2.(i)  char firstName[6]={'H','A','R','O','O','N'};
-
-(ii) for(int i=0;i<6;i++){
-        cout<<*(firstName + i)<<endl;
+public:
+    //constructor
+    MyClass() : data(0) {
+        cout<<"No-parameter constructor called!"<<endl;
     }
 
-(iii) When the compiler reads 'firstName[i]', as is the traditional way to iterate through a pointer, 
-it is actually chaning it into a pointer of the format '*([variable] + [value entered])'.
+    //constructor
+    MyClass(int value) : data(value) {
+        cout<<"Parameterized constructor called with value: "<<value<<endl;
+    }
 
-For syntactical breakdown: firstName is the address of the first element
-                            + i moves it to the next elements address
-                            * dereferences the address to provide the value within the array index
+    //return data
+    int getData() const {
+        return data;
+    }
 
-3.
-        #include <iostream>
-        using std::cout;
-        using std::endl;
-        int main(){
-        
-            float myValue = 10.0; //initializing of float variable and assigning it to a value
-            float* maybeFirst, maybeSecond = 5.0, *maybeThird; //initialing two float pointers and 
-                                                                //initializing and assigning another 
-                                                                //float variable
-            maybeFirst = &myValue; //assigning pointer to address of float variable
-            for(int i = 0; i < 4; i++){
-                if(i % 2 == 0){ //will iterate on 0 and 2 only
-                maybeThird = &maybeSecond; //will assign pointer to variables address
-                }
-                else{
-                maybeThird = &myValue; //will assign pointer to diff variables address
-                }               
-                *maybeFirst += *maybeThird; //adding each time either 5.0 or 10.0
-                    }
-        cout << "My value is: " << myValue << endl; //will print 30.0
-        
-return 0;
+    //display data
+    void display() const {
+        cout<<"Data: "<<data<<endl;
+    }
+};
+
+int main() {
+    vector<MyClass> myVec;
+
+    //constructor
+    MyClass obj1;
+    myVec.push_back(obj1);
+
+    //constructor
+    MyClass obj2(42);
+    myVec.push_back(obj2);
+
+    //constructor
+    MyClass obj3;
+    myVec.push_back(obj3);
+
+    for (size_t i = 0; i < myVec.size(); ++i) {
+        cout<<"Object "<<i+1<<" details:\n;
+        myVec.back().display(); //accessing the last element
+        myVec.pop_back();       //removing the last element
+    }
+
+    return 0;
 }
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
